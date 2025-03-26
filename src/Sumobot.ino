@@ -81,17 +81,15 @@ void Set_Motor (float Lval, float Rval, int timex){
       analogWrite(LPwm, Lval);  
       digitalWrite(LDir, LOW);       
       } else {
-      Lval=abs(Lval); 
       digitalWrite(LDir, HIGH);  
-      analogWrite(LPwm, Lval); 
+      analogWrite(LPwm, -Lval);
       }
    if (Rval >=0) {    
       analogWrite(RPwm, Rval);  
       digitalWrite(RDir, HIGH);       
-      } else {
-      Rval=abs(Rval);     
+      } else {    
       digitalWrite(RDir, LOW);  
-      analogWrite(RPwm, Rval); 
+      analogWrite(RPwm, -Rval); 
       }   
      // Serial.print(Rval); Serial.print("-"); Serial.println(Lval);
    delay(timex);  
