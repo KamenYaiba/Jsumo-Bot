@@ -46,31 +46,31 @@ int LastValue = 5; // Last Value Variable for remembering last Opponent sensor s
 
 void setup()
 {
-pinMode(LSens, INPUT);    // Left Opponent Sensor Input
-pinMode(RSens, INPUT);    // Right Opponent Sensor Input
-pinMode(MSens, INPUT);    // Middle Opponent Sensor Input
+  pinMode(LSens, INPUT);    // Left Opponent Sensor Input
+  pinMode(RSens, INPUT);    // Right Opponent Sensor Input
+  pinMode(MSens, INPUT);    // Middle Opponent Sensor Input
 
-pinMode(Buzzer, OUTPUT);  // Buzzer Declared as Output
-pinMode(ArduLed, OUTPUT); // Buzzer Declared as Output
-pinMode(Button, INPUT); // Buzzer Declared as Output
+  pinMode(Buzzer, OUTPUT);  // Buzzer Declared as Output
+  pinMode(ArduLed, OUTPUT); // Buzzer Declared as Output
+  pinMode(Button, INPUT); // Buzzer Declared as Output
 
-pinMode(RPwm, OUTPUT);  // Four PWM Channel Declared as Output
-pinMode(RDir, OUTPUT); 
-pinMode(LPwm, OUTPUT); 
-pinMode(LDir, OUTPUT); 
+  pinMode(RPwm, OUTPUT);  // Four PWM Channel Declared as Output
+  pinMode(RDir, OUTPUT); 
+  pinMode(LPwm, OUTPUT); 
+  pinMode(LDir, OUTPUT); 
 
-digitalWrite(Buzzer, LOW); // Buzzer Pin Made Low for Silence :)
-digitalWrite(ArduLed, LOW);  // Arduino Mode Led Made Low
-digitalWrite(DS1, HIGH); // 3 Dipswitch Pin Pullups Made
-digitalWrite(DS2, HIGH);
-digitalWrite(DS3, HIGH);
+  digitalWrite(Buzzer, LOW); // Buzzer Pin Made Low for Silence :)
+  digitalWrite(ArduLed, LOW);  // Arduino Mode Led Made Low
+  digitalWrite(DS1, HIGH); // 3 Dipswitch Pin Pullups Made
+  digitalWrite(DS2, HIGH);
+  digitalWrite(DS3, HIGH);
 
-digitalWrite(LSens, HIGH); // Opponent Sensor Pullups Made
-digitalWrite(RSens, HIGH); 
-digitalWrite(LFSens, HIGH); 
-digitalWrite(RFSens, HIGH); 
-digitalWrite(MSens, HIGH); 
-Serial.begin(9600);
+  digitalWrite(LSens, HIGH); // Opponent Sensor Pullups Made
+  digitalWrite(RSens, HIGH); 
+  digitalWrite(LFSens, HIGH); 
+  digitalWrite(RFSens, HIGH); 
+  digitalWrite(MSens, HIGH); 
+  Serial.begin(9600);
 }
 
 //Motor Control Function
