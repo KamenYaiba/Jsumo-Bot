@@ -126,132 +126,148 @@ void check()
 }
   
 void loop() {
- 
+
   digitalWrite(RPwm, LOW);
   digitalWrite(LPwm, LOW);
- if (digitalRead(Button)==1) { // If button is pressed at beginning.
-   tone(Buzzer, 18, 100); // Pin, Frequency, Duration
-   while (1) {  
-    if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==0) {
-               //Serial.print("Board Test");
-               Set_Motor(100,100,1000);
-               Set_Motor(0,0,1000);
-               Set_Motor(-90,-90,1000);
-               Set_Motor(0,0,1000);
-                tone(Buzzer, 18, 300);
-                tone(ArduLed, 18, 300);            
-       }}}
-//////////////////////////////////////////////
-tone(Buzzer, 18, 100); // Pin, Frequency, Duration
-Wait:
-     //Serial.println("Button Press Waited");
- Set_Motor(0,0,1);
- /// Sensor Control While Waiting The Button Press ///
- if ( digitalRead(MSens)==LOW || digitalRead(RSens)==LOW || digitalRead(LSens)== LOW || digitalRead(RFSens)==LOW || digitalRead(LFSens)== LOW || analogRead(Redge)< 500 || analogRead(Ledge)< 500 ) { digitalWrite(ArduLed, HIGH);} 
- else { digitalWrite(ArduLed, LOW); }
- ///////////////////////////////////////////////
- if (digitalRead(Button)==1) {
-     Duration=(analogRead(TRN)/4); // Duration variable based on TRN (A6) trimpot
-     //Serial.println("5 Sec Routine Started"); 
-      for (int i = 0; i < 5; i++){ digitalWrite(Buzzer, HIGH); digitalWrite(ArduLed, HIGH); delay(100); digitalWrite(Buzzer, LOW); digitalWrite(ArduLed, LOW);  delay(900); }
-        
-       if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==1){
-           //Serial.print("LEFT TURN");            
-           Set_Motor(-100,100,Duration); //                 
-       }
-          else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==0) {
-               //Serial.print("MIDDLE DIRECT");
-               Set_Motor(100,100,2);
-       }
-           else if (digitalRead(DS1)==1 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           //Serial.print("Sag");
-           Set_Motor(100,-100,Duration);           
-       }       
-         else if (digitalRead(DS1)==1 && digitalRead(DS2)==0 && digitalRead(DS3)==0){
-            //Serial.print("Left Circle");
-           Set_Motor(100,36,650); 
-       }       
-       else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==1){
-           //Serial.print("Right Circle");
-           Set_Motor(36,100,650); 
-       }       
-        else if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           //Serial.print("Reverse 180"); 
-           Set_Motor(-100,100,Duration); 
-          delay(Duration);  
-       }
-       //Serial.print("OK");
-       digitalWrite(Buzzer, LOW);
-      // EdgeTurn=(analogRead(TRN)/5); EdgeTurn=205-EdgeTurn; 
-       goto Start;
- } 
-goto Wait;
-
-
-//Main Loop scanning the lines on the ring
-Start:
-
- 
-
-       //--------
-  /// Edge Sensor Control Routine ///
-  digitalWrite(ArduLed, LOW);
-//delay (10);
-   
-if (analogRead(Ledge)< 150 && analogRead(Redge)< 150) {
-     digitalWrite(Buzzer, LOW);
-     digitalWrite(ArduLed, HIGH);
-
-     Set_Motor(-100, -100, 200);
-     
-   
-   delay(200); 
-   //Set_Motor(100, -100, EdgeTurn); // Right Backward, Left Forward, Turning Time Based on ETRN Trimpot
-    LastValue=5; 
-    check();
-    
- }
-   
-else if (analogRead(Ledge)<150 && analogRead(Redge)> 150) {
-   digitalWrite(Buzzer, LOW);
-   digitalWrite(ArduLed, HIGH);
-   Set_Motor(-90, -100, 90);
-   //Set_Motor(-97, -100, 30);
-   
-   delay(200); 
-   //Set_Motor(-100, 100, EdgeTurn); // Left Backward, Right Forward, Turning Time Based on ETRN Trimpot
-   LastValue=5;
-   check();
- }
-  
-else  if (analogRead(Ledge)> 150 && analogRead(Redge)< 150) {
-     digitalWrite(Buzzer, LOW);
-     digitalWrite(ArduLed, HIGH);
-      Set_Motor(-100, -90, 90);
-     //Set_Motor(-100, -97, 30);
-  
-   delay(200);  
-   //Set_Motor(100, -100, EdgeTurn); // Right Backward, Left Forward, Turning Time Based on ETRN Trimpot
-   LastValue=5;
-   check();
+  if (digitalRead(Button) == 1) { // If button is pressed at beginning.
+    tone(Buzzer, 18, 100); // Pin, Frequency, Duration
+    while (1) {
+      if (digitalRead(DS1) == 0 && digitalRead(DS2) == 0 && digitalRead(DS3) == 0) {
+        //Serial.print("Board Test");
+        Set_Motor(100, 100, 1000);
+        Set_Motor(0, 0, 1000);
+        Set_Motor(-90, -90, 1000);
+        Set_Motor(0, 0, 1000);
+        tone(Buzzer, 18, 300);
+        tone(ArduLed, 18, 300);
+      }
+    }
   }
-   else
-/// Opponent Sensor Control Routine ///
-//if (digitalRead(Button)==LOW) {Set_Motor(0, 0,5000); digitalWrite(Buzzer, HIGH); LastValue=3;} else
+  //////////////////////////////////////////////
+  tone(Buzzer, 18, 100); // Pin, Frequency, Duration
+  Wait:
+    //Serial.println("Button Press Waited");
+    Set_Motor(0, 0, 1);
+  /// Sensor Control While Waiting The Button Press ///
+  if (digitalRead(MSens) == LOW || digitalRead(RSens) == LOW || digitalRead(LSens) == LOW || digitalRead(RFSens) == LOW || digitalRead(LFSens) == LOW || analogRead(Redge) < 500 || analogRead(Ledge) < 500) {
+    digitalWrite(ArduLed, HIGH);
+  } else {
+    digitalWrite(ArduLed, LOW);
+  }
+  ///////////////////////////////////////////////
+  if (digitalRead(Button) == 1) {
+    Duration = (analogRead(TRN) / 4); // Duration variable based on TRN (A6) trimpot
+    //Serial.println("5 Sec Routine Started"); 
+    for (int i = 0; i < 5; i++) {
+      digitalWrite(Buzzer, HIGH);
+      digitalWrite(ArduLed, HIGH);
+      delay(100);
+      digitalWrite(Buzzer, LOW);
+      digitalWrite(ArduLed, LOW);
+      delay(900);
+    }
 
-if (digitalRead(MSens)==LOW) {Set_Motor(MaxSpeed, MaxSpeed,1); digitalWrite(Buzzer, HIGH); LastValue=5;} else
-if (digitalRead(LSens)== LOW) {Set_Motor(-40, TurnSpeed,1); digitalWrite(Buzzer, HIGH); LastValue=7;} else
-if (digitalRead(RSens)==LOW) {Set_Motor(TurnSpeed, -40,1); digitalWrite(Buzzer, HIGH); LastValue=3;} else
+    if (digitalRead(DS1) == 0 && digitalRead(DS2) == 1 && digitalRead(DS3) == 1) {
+      //Serial.print("LEFT TURN");            
+      Set_Motor(-100, 100, Duration); //                 
+    } else if (digitalRead(DS1) == 0 && digitalRead(DS2) == 0 && digitalRead(DS3) == 0) {
+      //Serial.print("MIDDLE DIRECT");
+      Set_Motor(100, 100, 2);
+    } else if (digitalRead(DS1) == 1 && digitalRead(DS2) == 1 && digitalRead(DS3) == 0) {
+      //Serial.print("Sag");
+      Set_Motor(100, -100, Duration);
+    } else if (digitalRead(DS1) == 1 && digitalRead(DS2) == 0 && digitalRead(DS3) == 0) {
+      //Serial.print("Left Circle");
+      Set_Motor(100, 36, 650);
+    } else if (digitalRead(DS1) == 0 && digitalRead(DS2) == 0 && digitalRead(DS3) == 1) {
+      //Serial.print("Right Circle");
+      Set_Motor(36, 100, 650);
+    } else if (digitalRead(DS1) == 0 && digitalRead(DS2) == 1 && digitalRead(DS3) == 0) {
+      //Serial.print("Reverse 180"); 
+      Set_Motor(-100, 100, Duration);
+      delay(Duration);
+    }
+    //Serial.print("OK");
+    digitalWrite(Buzzer, LOW);
+    // EdgeTurn=(analogRead(TRN)/5); EdgeTurn=205-EdgeTurn; 
+    goto Start;
+  }
+  goto Wait;
 
-//if (digitalRead(LFSens)== LOW) {Set_Motor(-40, TurnSpeed,1); digitalWrite(Buzzer, HIGH); LastValue=7;} else
-//if (digitalRead(RFSens)==LOW) {Set_Motor(TurnSpeed, -40,1); digitalWrite(Buzzer, HIGH); LastValue=3;} else
-{
-  digitalWrite(Buzzer, LOW);
-//Speed=(analogRead(SPD)/10.3); Speed=100-Speed; 
+  //Main Loop scanning the lines on the ring
+  Start:
 
-if (LastValue==5) { Set_Motor(35, 35,1);} else // Forward, Based on SPD (A7) Trimpot
-if (LastValue==7) { Set_Motor(-20, Speed,2);} else  // Left Turning Based on SPD (A7) Trimpot
-if (LastValue==3) { Set_Motor(Speed, -20,2);}  // Right Turning Based on SPD (A7) Trimpot
-}
-goto Start;
+    //--------
+    /// Edge Sensor Control Routine ///
+    digitalWrite(ArduLed, LOW);
+  //delay (10);
+
+  if (analogRead(Ledge) < 150 && analogRead(Redge) < 150) {
+    digitalWrite(Buzzer, LOW);
+    digitalWrite(ArduLed, HIGH);
+
+    Set_Motor(-100, -100, 200);
+
+    delay(200);
+    //Set_Motor(100, -100, EdgeTurn); // Right Backward, Left Forward, Turning Time Based on ETRN Trimpot
+    LastValue = 5;
+    check();
+
+  } else if (analogRead(Ledge) < 150 && analogRead(Redge) > 150) {
+    digitalWrite(Buzzer, LOW);
+    digitalWrite(ArduLed, HIGH);
+    Set_Motor(-90, -100, 90);
+    //Set_Motor(-97, -100, 30);
+
+    delay(200);
+    //Set_Motor(-100, 100, EdgeTurn); // Left Backward, Right Forward, Turning Time Based on ETRN Trimpot
+    LastValue = 5;
+    check();
+  } else if (analogRead(Ledge) > 150 && analogRead(Redge) < 150) {
+    digitalWrite(Buzzer, LOW);
+    digitalWrite(ArduLed, HIGH);
+    Set_Motor(-100, -90, 90);
+    //Set_Motor(-100, -97, 30);
+
+    delay(200);
+    //Set_Motor(100, -100, EdgeTurn); // Right Backward, Left Forward, Turning Time Based on ETRN Trimpot
+    LastValue = 5;
+    check();
+  } else
+    /// Opponent Sensor Control Routine ///
+    //if (digitalRead(Button)==LOW) {Set_Motor(0, 0,5000); digitalWrite(Buzzer, HIGH); LastValue=3;} else
+
+    if (digitalRead(MSens) == LOW) {
+      Set_Motor(MaxSpeed, MaxSpeed, 1);
+      digitalWrite(Buzzer, HIGH);
+      LastValue = 5;
+    } else
+  if (digitalRead(LSens) == LOW) {
+    Set_Motor(-40, TurnSpeed, 1);
+    digitalWrite(Buzzer, HIGH);
+    LastValue = 7;
+  } else
+  if (digitalRead(RSens) == LOW) {
+    Set_Motor(TurnSpeed, -40, 1);
+    digitalWrite(Buzzer, HIGH);
+    LastValue = 3;
+  } else
+
+  //if (digitalRead(LFSens)== LOW) {Set_Motor(-40, TurnSpeed,1); digitalWrite(Buzzer, HIGH); LastValue=7;} else
+  //if (digitalRead(RFSens)==LOW) {Set_Motor(TurnSpeed, -40,1); digitalWrite(Buzzer, HIGH); LastValue=3;} else
+  {
+    digitalWrite(Buzzer, LOW);
+    //Speed=(analogRead(SPD)/10.3); Speed=100-Speed; 
+
+    if (LastValue == 5) {
+      Set_Motor(35, 35, 1);
+    } else // Forward, Based on SPD (A7) Trimpot
+      if (LastValue == 7) {
+        Set_Motor(-20, Speed, 2);
+      } else // Left Turning Based on SPD (A7) Trimpot
+        if (LastValue == 3) {
+          Set_Motor(Speed, -20, 2);
+        } // Right Turning Based on SPD (A7) Trimpot
+  }
+  goto Start;
 }
