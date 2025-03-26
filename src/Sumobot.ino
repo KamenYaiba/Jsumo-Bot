@@ -70,7 +70,7 @@ void setup()
   digitalWrite(LFSens, HIGH); 
   digitalWrite(RFSens, HIGH); 
   digitalWrite(MSens, HIGH); 
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 //Motor Control Function
@@ -98,27 +98,27 @@ void Set_Motor (float Lval, float Rval, int timex){
 void check()
  { delay(10);
   if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==1){
-           Serial.print("LEFT TURN");            
+           //Serial.print("LEFT TURN");            
            Set_Motor(-100,100,Duration); //                 
        }
           else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==0) {
-               Serial.print("MIDDLE DIRECT");
+               //Serial.print("MIDDLE DIRECT");
                Set_Motor(100,100,2);
        }
            else if (digitalRead(DS1)==1 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           Serial.print("Sag");
+           //Serial.print("Sag");
            Set_Motor(100,-100,Duration);           
        }       
          else if (digitalRead(DS1)==1 && digitalRead(DS2)==0 && digitalRead(DS3)==0){
-            Serial.print("Left Circle");
-           Set_Motor(100,36,650); 
+          //Serial.print("Left Circle");
+          Set_Motor(100,36,650); 
        }       
        else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==1){
-           Serial.print("Right Circle");
+           //Serial.print("Right Circle");
            Set_Motor(36,100,650); 
        }       
         else if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           Serial.print("Reverse 180"); 
+           //Serial.print("Reverse 180"); 
            Set_Motor(-100,100,Duration); 
           delay(Duration);  
        }
@@ -133,7 +133,7 @@ void loop() {
    tone(Buzzer, 18, 100); // Pin, Frequency, Duration
    while (1) {  
     if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==0) {
-               Serial.print("Board Test");
+               //Serial.print("Board Test");
                Set_Motor(100,100,1000);
                Set_Motor(0,0,1000);
                Set_Motor(-90,-90,1000);
@@ -144,7 +144,7 @@ void loop() {
 //////////////////////////////////////////////
 tone(Buzzer, 18, 100); // Pin, Frequency, Duration
 Wait:
-     Serial.println("Button Press Waited");
+     //Serial.println("Button Press Waited");
  Set_Motor(0,0,1);
  /// Sensor Control While Waiting The Button Press ///
  if ( digitalRead(MSens)==LOW || digitalRead(RSens)==LOW || digitalRead(LSens)== LOW || digitalRead(RFSens)==LOW || digitalRead(LFSens)== LOW || analogRead(Redge)< 500 || analogRead(Ledge)< 500 ) { digitalWrite(ArduLed, HIGH);} 
@@ -152,35 +152,35 @@ Wait:
  ///////////////////////////////////////////////
  if (digitalRead(Button)==1) {
      Duration=(analogRead(TRN)/4); // Duration variable based on TRN (A6) trimpot
-     Serial.println("5 Sec Routine Started"); 
+     //Serial.println("5 Sec Routine Started"); 
       for (int i = 0; i < 5; i++){ digitalWrite(Buzzer, HIGH); digitalWrite(ArduLed, HIGH); delay(100); digitalWrite(Buzzer, LOW); digitalWrite(ArduLed, LOW);  delay(900); }
         
        if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==1){
-           Serial.print("LEFT TURN");            
+           //Serial.print("LEFT TURN");            
            Set_Motor(-100,100,Duration); //                 
        }
           else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==0) {
-               Serial.print("MIDDLE DIRECT");
+               //Serial.print("MIDDLE DIRECT");
                Set_Motor(100,100,2);
        }
            else if (digitalRead(DS1)==1 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           Serial.print("Sag");
+           //Serial.print("Sag");
            Set_Motor(100,-100,Duration);           
        }       
          else if (digitalRead(DS1)==1 && digitalRead(DS2)==0 && digitalRead(DS3)==0){
-            Serial.print("Left Circle");
+            //Serial.print("Left Circle");
            Set_Motor(100,36,650); 
        }       
        else if (digitalRead(DS1)==0 && digitalRead(DS2)==0 && digitalRead(DS3)==1){
-           Serial.print("Right Circle");
+           //Serial.print("Right Circle");
            Set_Motor(36,100,650); 
        }       
         else if (digitalRead(DS1)==0 && digitalRead(DS2)==1 && digitalRead(DS3)==0){
-           Serial.print("Reverse 180"); 
+           //Serial.print("Reverse 180"); 
            Set_Motor(-100,100,Duration); 
           delay(Duration);  
        }
-       Serial.print("OK");
+       //Serial.print("OK");
        digitalWrite(Buzzer, LOW);
       // EdgeTurn=(analogRead(TRN)/5); EdgeTurn=205-EdgeTurn; 
        goto Start;
